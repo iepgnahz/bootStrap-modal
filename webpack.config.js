@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     "index": './client/src/index.js',
-    "vendors": ['bootstrap.css', 'react', 'react-dom']
+      "vendors": ['jquery','bootstrap.css','bootstrap.js','react', 'react-dom']
   },
   output: {
     path: __dirname + '/client/dist/',
@@ -53,6 +53,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery"
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendors',
       filename: 'vendors.js'
@@ -68,7 +73,9 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'bootstrap.css': 'bootstrap/dist/css/bootstrap.min.css'
+      'bootstrap.css': 'bootstrap/dist/css/bootstrap.min.css',
+      'jquery': 'jquery/dist/jquery.min.js',
+      'bootstrap.js': 'bootstrap/dist/js/bootstrap.min.js',
     }
   }
 };
